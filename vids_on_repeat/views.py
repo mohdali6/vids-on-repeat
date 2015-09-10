@@ -21,6 +21,7 @@ def video_search(request):
     if 'search_query' in request.GET and request.GET['search_query']:
         try:
             videoList = youtube_search(query=request.GET['search_query'], max_results=MAX_RESULTS)
+            return render(request, 'vids_on_repeat/result.html', {'videoList': videoList, 'form': VideoSearchForm})
         except HttpError, e:
             print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
             request.session['error'] = True
