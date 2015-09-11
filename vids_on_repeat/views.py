@@ -33,10 +33,8 @@ def video_search(request):
         return redirect('/vids/')
 
 
-def watch_video(request):
-    if 'video_id' in request.GET and request.GET['video_id']:
-        #print request.GET['video_id']
-        #ToDo get video player
-        return render(request, 'vids_on_repeat/watch.html', {'form':VideoSearchForm})
-    else:
-        return redirect('/vids/')
+def watch_video(request, video_id):
+    print video_id
+    #ToDo get video player
+
+    return render(request, 'vids_on_repeat/watch.html', {'form':VideoSearchForm})
