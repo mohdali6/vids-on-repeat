@@ -6,6 +6,8 @@ from .forms import VideoSearchForm
 from .api_functions import youtube_search
 
 MAX_RESULTS = '15'
+WATCH_URL = '/vids/watch/'
+
 
 def index(request):
     form = VideoSearchForm()
@@ -17,6 +19,7 @@ def index(request):
 
     return render(request, 'vids_on_repeat/index.html', context)
 
+
 def video_search(request):
     if 'search_query' in request.GET and request.GET['search_query']:
         try:
@@ -26,7 +29,14 @@ def video_search(request):
             print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
             request.session['error'] = True
             return redirect('/vids/')
+    else:
+        return redirect('/vids/')
 
-        return HttpResponse("Display search results")
+
+def watch_video(request):
+    if 'video_id' in request.GET and request.GET['video_id']:
+        #print request.GET['video_id']
+        #ToDo get video player
+        return render(request, 'vids_on_repeat/watch.html', {'form':VideoSearchForm})
     else:
         return redirect('/vids/')

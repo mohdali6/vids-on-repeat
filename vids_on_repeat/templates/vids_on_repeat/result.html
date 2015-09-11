@@ -5,12 +5,7 @@
     <title>Results</title>
 </head>
 <body>
-
-    {% if error %}
-        <p>Something went wrong! Search again</p>
-    {% endif %}
-
-    <form action="search/" method="get">
+    <form action="" method="get">
         {{ form }}
         <input type="submit" value="Search" />
     </form>
@@ -20,6 +15,11 @@
     <ul>
         {% for video in videoList %}
             <li>{{ video.0 }}</li>
+            <li>
+                {% with "https://i.ytimg.com/vi/"|add:video.1|add:"/mqdefault.jpg" as template %}
+                    <a href={{ template }}><img src={{ template }} alt="1" width="42" height="42"></a>
+                {% endwith %}
+            </li>
         {% endfor %}
     </ul>
 
