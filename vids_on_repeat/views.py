@@ -34,7 +34,7 @@ def video_search(request):
 
 
 def watch_video(request, video_id):
-    print video_id
-    #ToDo get video player
+    videoSearchForm = VideoSearchForm()
+    context = {'videoId': video_id, 'videoSearchForm':videoSearchForm}
 
-    return render(request, 'vids_on_repeat/watch.html', {'form':VideoSearchForm})
+    return render(request, 'vids_on_repeat/watch.html', context)
