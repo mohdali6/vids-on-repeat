@@ -29,3 +29,9 @@ def youtube_search(**kwargs):
               videos.append((search_result["snippet"]["title"], search_result["id"]["videoId"]))
 
     return videos
+
+def video_title_search(video_id):
+    youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=YOUTUBE_API_KEY)
+    video_response = youtube.videos().list(id=video_id,
+                                           part='snippet').execute()
+    return video_response["items"][0]["snippet"]["title"]
