@@ -4,6 +4,8 @@ from oauth2client.tools import argparser
 import os
 import json
 
+## ********** Part of this code is from YouTube API samples, which are covered under Apache 2.0 License ********** ##
+
 keyFile = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/some_data.json'
 
 YOUTUBE_API_KEY = ""
