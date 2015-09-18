@@ -14,12 +14,11 @@
 
     <ul>
         {% for video in videoList %}
-            <li>{{ video.0 }}</li>
             <li>
 
-                {% with "https://i.ytimg.com/vi/"|add:video.1|add:"/mqdefault.jpg" as video_thumbnail %}
+                {% with "https://i.ytimg.com/vi/"|add:video.1|add:"/hqdefault.jpg" as video_thumbnail %}
 
-                    <a href="{% url 'watch_video' video.1 %}"><img src={{ video_thumbnail }} alt="1" width="42" height="42"></a>
+                    <a href="{% url 'watch_video' video.1 %}"><img src={{ video_thumbnail }} alt="1" width="42" height="42">{{ video.0 }}</a>
 
                 {% endwith %}
 

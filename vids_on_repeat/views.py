@@ -45,3 +45,7 @@ def watch_video(request, video_id):
     context = {'videoId': video_id, 'videoSearchForm':videoSearchForm}
 
     return render(request, 'vids_on_repeat/watch.html', context)
+
+#ToDo Function that returns most repeated video_id
+
+#ToDo Function that returns list of top 5 trends
