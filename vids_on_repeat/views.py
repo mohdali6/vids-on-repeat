@@ -49,3 +49,7 @@ def watch_video(request, video_id):
 #ToDo Function that returns most repeated video_id
 
 #ToDo Function that returns list of top 5 trends
+
+def video_durtaion(request, video_duration):
+    #ToDo
+    return None
