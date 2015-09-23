@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from apiclient.errors import HttpError
-from models import Video
+from models import Video, VideoRepeats
 
 from .forms import VideoSearchForm
 from .api_functions import youtube_search, video_title_search
@@ -46,7 +46,11 @@ def watch_video(request, video_id):
 
     return render(request, 'vids_on_repeat/watch.html', context)
 
-#ToDo Function that returns most repeated video_id
+
+def most_repeated_video(request):
+    video_id = VideoRepeats.objects.all()[0].video_id
+    return JsonResponse({'video_id': video_id})
+
 
 #ToDo Function that returns list of top 5 trends
 
