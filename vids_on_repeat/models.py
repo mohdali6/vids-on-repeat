@@ -15,3 +15,6 @@ class VideoRepeats(models.Model):
 
     class Meta:
         ordering = ('-repeat_count',)
+
+    def __str__(self):
+        return self.video.video_title
