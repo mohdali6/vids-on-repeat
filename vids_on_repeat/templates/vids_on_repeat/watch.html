@@ -88,8 +88,15 @@
 
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.ENDED) {
-            $.post("/vids/increment-repeat/", {
+            var dataToSend = {
                 video_id: "{{ videoId }}"
+            };
+            $.ajax({
+                url: "/vids/increment-repeat/",
+                type: "POST",
+                data: JSON.stringify(dataToSend),
+                contentType: "application/json",
+                dataType: 'json'
             });
         }
     }

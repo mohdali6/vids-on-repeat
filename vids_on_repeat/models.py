@@ -10,8 +10,8 @@ class Video(models.Model):
 
 
 class VideoRepeats(models.Model):
+    video = models.OneToOneField(Video, primary_key=True)
     repeat_count = models.IntegerField(default=0)
-    video = models.OneToOneField(Video)
 
     class Meta:
         ordering = ('-repeat_count',)

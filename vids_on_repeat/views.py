@@ -5,6 +5,8 @@ from models import Video, VideoRepeats
 
 from .forms import VideoSearchForm
 from .api_functions import youtube_search, video_title_search
+from django.db.models import F
+import json
 
 MAX_RESULTS = '15'
 WATCH_URL = '/vids/watch/'
@@ -54,18 +56,25 @@ def most_repeated_video(request):
     return JsonResponse({'video_id': video_id})
 
 
-#Function to increment number of repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
-
-
-#ToDo
+#Function to increment overall repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
 def increment_repeat(request):
-    #if request.method == 'POST':
-        #Do something
+    if request.method == 'POST':
+        video_id = json.loads(request.body)['video_id']
+        try:
+            vid, created = VideoRepeats.objects.get_or_create(video__video_id=video_id)
+            #vid = VideoRepeats.objects.get(video__video_id=video_id)
+            vid.repeat_count = F('repeat_count') + 1
+            vid.save()
+        except:
+            pass
+
+    #ToDo Change response
     return redirect('/vids/')
 
 
 #ToDo Function that returns list of top 5 trends
 
+#ToDo
 def video_durtaion(request, video_duration):
     #ToDo
     return None
