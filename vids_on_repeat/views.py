@@ -41,6 +41,8 @@ def watch_video(request, video_id):
     except:
         pass
 
+    request.session['player_requested'] = True
+
     videoSearchForm = VideoSearchForm()
     context = {'videoId': video_id, 'videoSearchForm':videoSearchForm}
 
@@ -50,6 +52,16 @@ def watch_video(request, video_id):
 def most_repeated_video(request):
     video_id = VideoRepeats.objects.all()[0].video_id
     return JsonResponse({'video_id': video_id})
+
+
+#Function to increment number of repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
+
+
+#ToDo
+def increment_repeat(request):
+    #if request.method == 'POST':
+        #Do something
+    return redirect('/vids/')
 
 
 #ToDo Function that returns list of top 5 trends
