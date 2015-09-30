@@ -6,12 +6,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
+<style>
+
+.centered-div {
+    max-width: 560px; /* you have to have a size or this method doesn't work */
+    max-height: 315px;
+    margin-right: auto;
+    margin-left: auto;
+    }
+
+</style>
+
 <body>
 
-<form action="/vids/search/" method="get">
-    {{ videoSearchForm }}
-    <input type="submit" value="Search"/>
-</form>
+
+
+<div class="centered-div">
+    {% if error %}
+        <p>Something went wrong! Search again</p>
+    {% endif %}
+
+    <p>Search any Youtube video and play on infinite repeat!</p>
+
+    <div>
+        <form action="/vids/search/" method="get">
+            {{ videoSearchForm }}
+            <input type="submit" value="Search"/>
+        </form>
+    </div>
 
 </br>
 
@@ -102,6 +124,8 @@
     }
 
 </script>
+
+ </div>
 
 </body>
 </html>

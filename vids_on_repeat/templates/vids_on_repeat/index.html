@@ -1,8 +1,37 @@
-{% if error %}
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<style>
+
+    div {
+        height: 500px;
+        width: 500px;
+        margin: auto;
+    }
+
+</style>
+
+
+<body>
+
+<div>
+    {% if error %}
     <p>Something went wrong! Search again</p>
-{% endif %}
-<p>Search Youtube videos and play on infinite repeat!</p>
-<form action="search/" method="get">
-    {{ form }}
-    <input type="submit" value="Search" />
-</form>
+    {% endif %}
+    <p>Search any Youtube video and play on infinite repeat!</p>
+
+    <form action="search/" method="get">
+        {{ form }}
+        <input type="submit" value="Search"/>
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -60,7 +60,7 @@ def most_repeated_video(request):
 # Function to increment overall repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
 @ensure_csrf_cookie
 def increment_repeat(request):
-    if request.method == 'POST':
+    if request.method == 'PUT':
         video_id = json.loads(request.body)['video_id']
         try:
             vid, created = VideoRepeats.objects.get_or_create(video=Video.objects.get(video_id=video_id))

@@ -4,27 +4,47 @@
     <meta charset="UTF-8">
     <title>Results</title>
 </head>
+
+<style>
+
+    div {
+        height: 800px;
+        width: 800px;
+        margin: auto;
+    }
+
+</style>
+
 <body>
-    <form action="" method="get">
-        {{ form }}
-        <input type="submit" value="Search" />
-    </form>
+    <div>
+        {% if error %}
+            <p>Something went wrong! Search again</p>
+        {% endif %}
 
-    </br>
+        <p>Search any Youtube video and play on infinite repeat!</p>
 
-    <ul>
-        {% for video in videoList %}
-            <li>
+        <form action="" method="get">
+            {{ form }}
+            <input type="submit" value="Search" />
+        </form>
 
-                {% with "https://i.ytimg.com/vi/"|add:video.1|add:"/hqdefault.jpg" as video_thumbnail %}
+        </br>
 
-                    <a href="{% url 'watch_video' video.1 %}"><img src={{ video_thumbnail }} alt="1" width="42" height="42">{{ video.0 }}</a>
+        <ul>
+            {% for video in videoList %}
+                <li>
 
-                {% endwith %}
+                    {% with "https://i.ytimg.com/vi/"|add:video.1|add:"/hqdefault.jpg" as video_thumbnail %}
 
-            </li>
-        {% endfor %}
-    </ul>
+                        <a href="{% url 'watch_video' video.1 %}"><img src={{ video_thumbnail }} alt="1" width="42" height="42">{{ video.0 }}</a>
+
+                    {% endwith %}
+
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
 
 </body>
 </html>
