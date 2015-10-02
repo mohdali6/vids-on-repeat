@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Video, VideoRepeats
+from models import Video, VideoRepeats, SessionBasedRepeats
 from django.contrib.sessions.models import Session
 
 
@@ -11,3 +11,4 @@ class SessionAdmin(admin.ModelAdmin):
 admin.site.register(Video)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(VideoRepeats)
+admin.site.register(SessionBasedRepeats)

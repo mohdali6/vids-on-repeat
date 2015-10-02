@@ -72,6 +72,11 @@ def increment_repeat(request):
     return HttpResponse(status=204)
 
 
+@ensure_csrf_cookie
+def increment_session_based_repeats(request):
+    #ToDo
+    return None
+
 #ToDo Function that returns list of top 5 trends
 
 #ToDo
