@@ -7,7 +7,7 @@ class Video(models.Model):
     video_id = models.CharField(max_length=15, primary_key=True)
     video_title = models.CharField(max_length=150)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.video_title
 
 
@@ -18,7 +18,7 @@ class VideoRepeats(models.Model):
     class Meta:
         ordering = ('-repeat_count',)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.video.video_title
 
 
@@ -29,3 +29,6 @@ class SessionBasedRepeats(models.Model):
 
     class Meta:
         unique_together = ('video', 'session')
+
+    def __unicode__(self):
+        return self.session.session_key + ' ' + self.video.video_title
