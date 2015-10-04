@@ -110,12 +110,24 @@
 
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.ENDED) {
+
             var dataToSend = {
                 video_id: "{{ videoId }}"
             };
+
+            //Increment overall repeat
             $.ajax({
                 url: "/vids/increment-repeat/",
-                type: "PUT",
+                type: "POST",
+                data: JSON.stringify(dataToSend),
+                contentType: "application/json",
+                dataType: 'json'
+            });
+
+            //Increment session based repeats
+            $.ajax({
+                url: "/vids/increment-session-repeat/",
+                type: "POST",
                 data: JSON.stringify(dataToSend),
                 contentType: "application/json",
                 dataType: 'json'

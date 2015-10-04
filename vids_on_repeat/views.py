@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from apiclient.errors import HttpError
-from models import Video, VideoRepeats
+from models import Video, VideoRepeats, SessionBasedRepeats
 from .forms import VideoSearchForm
 from .api_functions import youtube_search, video_title_search
 from django.db.models import F
 import json
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.sessions.models import Session
 
 MAX_RESULTS = '15'
 WATCH_URL = '/vids/watch/'
@@ -60,7 +61,7 @@ def most_repeated_video(request):
 # Function to increment overall repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
 @ensure_csrf_cookie
 def increment_repeat(request):
-    if request.method == 'PUT':
+    if request.method == 'POST':
         video_id = json.loads(request.body)['video_id']
         try:
             vid, created = VideoRepeats.objects.get_or_create(video=Video.objects.get(video_id=video_id))
@@ -73,11 +74,23 @@ def increment_repeat(request):
 
 
 @ensure_csrf_cookie
-def increment_session_based_repeats(request):
-    #ToDo
-    return None
+def increment_session_repeat(request):
+    if request.method == 'POST':
+        video_id = json.loads(request.body)['video_id']
+        session_id = request.session.session_key
+        video = Video.objects.get(video_id=video_id)
+        session = Session.objects.get(pk=session_id)
+        try:
+            vid, created = SessionBasedRepeats.objects.get_or_create(video=video, session=session)
+            vid.repeat_count = F('repeat_count') + 1
+            vid.save()
+        except:
+            return HttpResponse(status=500)
+    return HttpResponse(status=204)
+
 
 #ToDo Function that returns list of top 5 trends
+
 
 #ToDo
 def video_durtaion(request, video_duration):
