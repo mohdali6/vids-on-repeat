@@ -89,6 +89,11 @@ def increment_session_repeat(request):
     return HttpResponse(status=204)
 
 
+def session_based_repeat_count(request):
+    #ToDo
+    return JsonResponse({'repeat_count': 1232})
+
+
 #ToDo Function that returns list of top 5 trends
 
 

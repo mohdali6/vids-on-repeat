@@ -40,9 +40,25 @@
 <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
 <div id="player"></div>
 
+<div>
+    <table style="width:100%">
+        <tr>
+            <td width="20%">Repeats:</td>
+            <td id="sessionRepeats" width="80%">0</td>
+        </tr>
+    </table>
+</div>
+
 <!-- ********** Part of this script is from YouTube iFrame API samples, which are covered under Apache 2.0 License ********** -->
 
 <script>
+    //AJAX call to update current repeat count
+    $( document ).ready(function() {
+        $.get("/vids/get-session-based-repeat-count/", function(data, status){
+            $("#sessionRepeats").html(data["repeat_count"]);
+        });
+    });
+
     // Function to acquire csrftoken
     function getCookie(name) {
         var cookieValue = null;
