@@ -75,9 +75,10 @@ def increment_repeat(request):
 
 @ensure_csrf_cookie
 def increment_session_repeat(request):
-    if request.method == 'POST':
-        video_id = json.loads(request.body)['video_id']
-        session_id = request.session.session_key
+    video_id = json.loads(request.body)['video_id']
+    session_id = request.session.session_key
+
+    if request.method == 'POST' and (session_id+video_id) not in request.session:
         video = Video.objects.get(video_id=video_id)
         session = Session.objects.get(pk=session_id)
         try:
