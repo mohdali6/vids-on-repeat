@@ -10,8 +10,8 @@
 <style>
 
     div {
-        height: 500px;
-        width: 500px;
+        height: 800px;
+        width: 800px;
         margin: auto;
     }
 
@@ -21,17 +21,41 @@
 <body>
 
 <div>
-    {% if error %}
-    <p>Something went wrong! Search again</p>
-    {% endif %}
-    <p>Search any Youtube video and play on infinite repeat!</p>
+    <div>
+        {% if error %}
+        <p>Something went wrong! Search again</p>
+        {% endif %}
 
-    <form action="search/" method="get">
-        {{ form }}
-        <input type="submit" value="Search"/>
-    </form>
+        <h2>Search any Youtube video and play on infinite repeat!</h2>
+
+        <form action="search/" method="get">
+            {{ form }}
+            <input type="submit" value="Search"/>
+        </form>
+
+        <br>
+        <div>
+            <h3>Most Viewed Videos</h3>
+
+            <ul id="mostViewed">
+            </ul>
+
+        </div>
+    </div>
 
 </div>
+
+<script>
+    $( document ).ready(function() {
+        $.get("/vids/most-repeated-videos/", function(data, status){
+            $.each(data["video_list"], function(index, value){
+                //ToDo
+                $('#mostViewed').append("<li>"+ value +"</li>");
+            });
+            //$("#mostViewed").append(data["repeat_count"]);
+        });
+    });
+</script>
 
 </body>
 </html>

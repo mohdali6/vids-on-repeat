@@ -52,7 +52,7 @@
 <!-- ********** Part of this script is from YouTube iFrame API samples, which are covered under Apache 2.0 License ********** -->
 
 <script>
-    //AJAX call to update current repeat count
+    //jQuery call to update current repeat count
     $( document ).ready(function() {
         $.get("/vids/get-session-based-repeat-count/"+"{{ videoId }}/", function(data, status){
             $("#sessionRepeats").html(data["repeat_count"]);

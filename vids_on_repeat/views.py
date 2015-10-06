@@ -53,9 +53,20 @@ def watch_video(request, video_id):
     return render(request, 'vids_on_repeat/watch.html', context)
 
 
-def most_repeated_video(request):
-    video_id = VideoRepeats.objects.all()[0].video_id
-    return JsonResponse({'video_id': video_id})
+def most_repeated_videos(request):
+    if request.method == 'GET':
+        try:
+            video_qs = VideoRepeats.objects.all()[:10]
+            video_list = []
+
+            for video in video_qs:
+                video_list.append(video.video_id)
+
+            return JsonResponse({'video_list':video_list})
+        except:
+            return HttpResponse(status=500)
+
+    return HttpResponse(status=405)
 
 
 # Function to increment overall repeats of a video by 1  #http://127.0.0.1:8000/vids/watch/ZEdUljT7eGI/
