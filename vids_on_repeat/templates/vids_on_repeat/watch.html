@@ -54,7 +54,7 @@
 <script>
     //AJAX call to update current repeat count
     $( document ).ready(function() {
-        $.get("/vids/get-session-based-repeat-count/", function(data, status){
+        $.get("/vids/get-session-based-repeat-count/"+"{{ videoId }}/", function(data, status){
             $("#sessionRepeats").html(data["repeat_count"]);
         });
     });

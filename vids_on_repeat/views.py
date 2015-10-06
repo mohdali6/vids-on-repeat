@@ -107,9 +107,17 @@ def increment_session_repeat(request):
     return HttpResponse(status=405)
 
 
-def session_based_repeat_count(request):
-    #ToDo
-    return JsonResponse({'repeat_count': 1232})
+def session_based_repeat_count(request, video_id):
+    session_video_key = request.session.session_key + str(video_id)
+
+    if session_video_key in request.session:
+        try:
+            repeat_count = SessionBasedRepeats.objects.get(pk=request.session[session_video_key]).repeat_count
+            return JsonResponse({'repeat_count': repeat_count})
+        except:
+            return HttpResponse(status=500)
+
+    return JsonResponse({'repeat_count': 0})
 
 
 #ToDo Function that returns list of top 5 trends
