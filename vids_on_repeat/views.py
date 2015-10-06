@@ -82,9 +82,10 @@ def increment_session_repeat(request):
     if request.method == 'POST' and request_session_key in request.session:
         try:
             vid = SessionBasedRepeats.objects.get(pk=request.session[request_session_key])
+            video_repeat_count = vid.repeat_count
             vid.repeat_count = F('repeat_count') + 1
             vid.save()
-            return HttpResponse(status=204)
+            return JsonResponse({'repeat_count': video_repeat_count+1})
         except:
             return HttpResponse(status=500)
 
@@ -93,6 +94,7 @@ def increment_session_repeat(request):
         session = Session.objects.get(pk=session_id)
         try:
             vid, created = SessionBasedRepeats.objects.get_or_create(video=video, session=session)
+            video_repeat_count = vid.repeat_count
 
             #Storing request_session_key in request.session dict as key and pk of vid above as value
             request.session[request_session_key] = vid.pk
@@ -100,7 +102,7 @@ def increment_session_repeat(request):
             #Incrementing repeat count
             vid.repeat_count = F('repeat_count') + 1
             vid.save()
-            return HttpResponse(status=204)
+            return JsonResponse({'repeat_count': video_repeat_count+1})
         except:
             return HttpResponse(status=500)
 
