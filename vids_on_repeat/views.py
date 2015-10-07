@@ -60,7 +60,7 @@ def most_repeated_videos(request):
             video_list = []
 
             for video in video_qs:
-                video_list.append(video.video_id)
+                video_list.append((video.video_id, video.video.video_title))
 
             return JsonResponse({'video_list':video_list})
         except:

@@ -37,7 +37,7 @@
         <div>
             <h3>Most Viewed Videos</h3>
 
-            <ul id="mostViewed">
+            <ul id="mostViewed" style="list-style-type: none;">
             </ul>
 
         </div>
@@ -49,8 +49,10 @@
     $( document ).ready(function() {
         $.get("/vids/most-repeated-videos/", function(data, status){
             $.each(data["video_list"], function(index, value){
-                //ToDo
-                $('#mostViewed').append("<li>"+ value +"</li>");
+                var thumbnail_img_url = "https://i.ytimg.com/vi/" + value[0] + "/hqdefault.jpg";
+                var img_tag = "<img src=" + thumbnail_img_url + " alt='" + value[1] + "' width='150' height='100'>";
+                var list_item_tag = "<li><a href='/vids/watch/" + value[0] + "/'>" + img_tag + value[1] + "</a></li>";
+                $('#mostViewed').append(list_item_tag);
             });
             //$("#mostViewed").append(data["repeat_count"]);
         });
