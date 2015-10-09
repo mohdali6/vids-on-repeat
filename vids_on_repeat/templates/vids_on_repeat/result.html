@@ -7,10 +7,15 @@
 
 <style>
 
+    html, body {
+       height: auto;
+    }
+
     div {
-        height: 800px;
+        min-height: 100%;
+        height: auto;
         width: 800px;
-        margin: auto;
+        margin: 0 auto -142px;
     }
 
 </style>
@@ -21,7 +26,7 @@
             <p>Something went wrong! Search again</p>
         {% endif %}
 
-        <p>Search any Youtube video and play on infinite repeat!</p>
+        <h2>Search any Youtube video and play on infinite repeat!</h2>
 
         <form action="" method="get">
             {{ form }}
