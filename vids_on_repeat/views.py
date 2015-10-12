@@ -133,6 +133,17 @@ def session_based_repeat_count(request, video_id):
     return JsonResponse({'repeat_count': 0})
 
 
+#Returns the total views of a video
+def total_views(request, video_id):
+    if request.method == 'GET':
+        try:
+            views = VideoRepeats.objects.get(video__video_id=video_id).repeat_count
+            return JsonResponse({'total_views': views})
+        except:
+            return HttpResponse(status=500)
+    return HttpResponse(status=405)
+
+
 #ToDo Function that returns list of top 5 trends
 
 
