@@ -43,8 +43,12 @@
 <div>
     <table style="width:100%">
         <tr>
-            <td width="20%">Repeats:</td>
+            <td width="20%">Repeats: </td>
             <td id="sessionRepeats" width="80%">0</td>
+        </tr>
+        <tr>
+            <td width="20%">Total Repeats: </td>
+            <td id="totalRepeats" width="80%">0</td>
         </tr>
     </table>
 </div>
@@ -54,8 +58,14 @@
 <script>
     //jQuery call to update current repeat count
     $( document ).ready(function() {
+        // Fetching repeat count
         $.get("/vids/get-session-based-repeat-count/"+"{{ videoId }}/", function(data, status){
             $("#sessionRepeats").html(data["repeat_count"]);
+        });
+
+        //Fetching total views
+        $.get("/vids/get-total-repeats/"+"{{ videoId }}/", function(data, status){
+            $("#totalRepeats").html(data["total_repeats"]);
         });
     });
 
